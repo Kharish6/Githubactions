@@ -13,14 +13,6 @@ jobs:
               uses: actions/setup-node@v4 # Updated to v4
               with: 
                 node-version: "18"
-
-            # 🔍 DEBUG STEP: This will show you exactly where files are
-            - name: View repository structure
-              run: |
-                echo "Current directory:"
-                pwd
-                echo "Listing all files:"
-                ls -R
-
+                
             - name: Run node index.js
               run: node index.js
