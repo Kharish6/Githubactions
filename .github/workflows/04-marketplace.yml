@@ -6,16 +6,21 @@ jobs:
     run-application:
         runs-on: ubuntu-latest
         steps:
-            # 1. Bring the code into this specific virtual machine
             - name: checkout the code
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4 # Updated to v4
 
-            # 2. Setup the Node.js environment
             - name: Run the app in Node.js
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4 # Updated to v4
               with: 
                 node-version: "18"
 
-            # 3. Now Node can find your index.js file
+            # 🔍 DEBUG STEP: This will show you exactly where files are
+            - name: View repository structure
+              run: |
+                echo "Current directory:"
+                pwd
+                echo "Listing all files:"
+                ls -R
+
             - name: Run node index.js
               run: node index.js
