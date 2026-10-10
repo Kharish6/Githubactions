@@ -15,3 +15,5 @@ jobs:
               uses: actions/setup-node@v4 
               with:
                 node-version: ${{ matrix.node-version }} 
+            - name: run node js app
+              run: node index.js
