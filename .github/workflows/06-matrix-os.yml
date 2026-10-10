@@ -1,0 +1,24 @@
+name: matrix-OS-workflow
+on:
+    push: 
+        branches: ["*"]
+jobs:
+    run-multiple-nodejs-versions:
+        strategy:
+            matrix:
+                node-version: [18,20,22]
+                
+                os: 
+                    - ubuntu-latest
+                    - windows-latest
+                    - macos-latest
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v4 
+            - name: steupNodejs version
+              uses: actions/setup-node@v4 
+              with:
+                node-version: ${{ matrix.node-version }} 
+            - name: run node js app
+              run: node index.js
