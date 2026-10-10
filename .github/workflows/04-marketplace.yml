@@ -3,17 +3,19 @@ on:
     push: 
         branches: ["*"]
 jobs:
-    code-checkout:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout the code
-              uses: actions/checkout@v3
     run-application:
         runs-on: ubuntu-latest
-        needs: code-checkout
         steps:
+            # 1. Bring the code into this specific virtual machine
+            - name: checkout the code
+              uses: actions/checkout@v3
+
+            # 2. Setup the Node.js environment
             - name: Run the app in Node.js
               uses: actions/setup-node@v3
               with: 
                 node-version: "18"
-            - run: node index.js
+
+            # 3. Now Node can find your index.js file
+            - name: Run node index.js
+              run: node index.js
