@@ -1,0 +1,22 @@
+#The Goal: You want a build job to run on every single code push. 
+#However, you want the deploy-staging job to run only if the code is pushed to the main branch, 
+#AND you want a manual-audit job to run only if you manually trigger the workflow using GitHub's "Run workflow" button (workflow_dispatch).
+
+name: conditional-job-workflow
+on:
+    push:
+        branches: ["*"]
+    workflow_dispatch: 
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: build the code
+              run: echo "Building the code"
+    deploy:
+        if: github.ref == 'refs/heads/main'
+        runs-on: ubuntu-latest
+        steps:
+            - name: deploy to staging
+              run: echo "Deploying to staging"
+
